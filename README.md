@@ -15,8 +15,6 @@ The informations we dispose at the time of the prediction are the anomaly level 
 the amount of peak demand lost during an outage event (in Megawatt) (DEMAND.LOSS.MW (Megawatt)), an the Annual number of total customers served in the U.S. state (TOTAL.CUSTOMERS).
 
 
-                  where the most importants are anomaly.level which gives us the anomaly level of el nino, the cause categroy detail which tells us what happenend, the climate category and the duration of the outage.
-
 ## Baseline Model
 The baseline model is a Random Forst classifier which has been trained on the folllowing features : CLIMATE.REGION, MONTH, TOTAL.PRICE (cents / kilowatt-hour), TOTAL.SALES (Megawatt-hour), POPPCT_UC. 
 The model uses it's default parameters and will be tested using a cross validation.
