@@ -19,7 +19,7 @@ the amount of peak demand lost during an outage event (in Megawatt) (DEMAND.LOSS
 The baseline model is a Random Forst classifier which has been trained on the folllowing features : CLIMATE.REGION, MONTH, TOTAL.PRICE (cents / kilowatt-hour), TOTAL.SALES (Megawatt-hour), POPPCT_UC. 
 The model uses it's default parameters and will be tested using a cross validation.
 About the features, CLIMATE.REGION is one hot encoded as the only categorical (nominal) feature. The others will be left as is.
-This gives us an of 44%, which is quite low and can definitely can be improved as we have more datas and can tune our model and try other ones. The precision score is 
+This gives us an of 44%, which is quite low and can definitely can be improved as we have more datas and can tune our model and try other ones. The precision score is 0.26 and the recall value is 0.25. These values are quite low and we will show how in the final model part we increased them.
 
 ## Final Model
 We want to predict severe weather, intentional attack, system operability disruption, equipment failure, public appeal, fuel supply emergency, and islanding 
@@ -45,7 +45,7 @@ The random forest model has a precision of 0.5 which is not very high and we cou
 The recall score is also quite low with a result of 0.45 .
 
 Here is the confusion matrix : 
-<iframe src="confusion_matrix_RF.png" width=800 height=600 frameBorder=0></iframe>
+<iframe src="confusion_matrix_RF.html" width=800 height=600 frameBorder=0></iframe>
 
 According to this, result look quite good as it seems to be few mistakes.
 
@@ -55,7 +55,7 @@ According to this, result look quite good as it seems to be few mistakes.
 The decisison tree model has a precision of 0.6 with the hyperparameters 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10 that were chosen by the method GridSearchCV. Here the precision is higher than the previous model with a value of 0.6 against 0.5 for the previous model which is encouraging. According to this, we are getting less false positives, which is what we are looking for. The accuracy score is also higher with 0.76 against 0.71 and the recall value is 0.6 which is also better than the previous model that obtained 0.45 .
 
 Here is the confusion matrix : 
-<iframe src="confusion_matrix_DT.png" width=800 height=600 frameBorder=0></iframe>
+<iframe src="confusion_matrix_DT.html" width=800 height=600 frameBorder=0></iframe>
 
 Here, results look better than the previous model, which is coherent with our results.
 
@@ -63,7 +63,7 @@ Here, results look better than the previous model, which is coherent with our re
 The gradient boost model provide s a precision of 0.69, an accuracy of 0.81 and a recall value of 0.61 using a learning rate of 0.1, a maximum depth of 3 and the n_estimators is set at 50 (chosen to be the best by GridSearchCV). This model is the best one compared to the previous ones as it obtained the best metrics each time.
 
 Here is the confusion matrix : 
-<iframe src="confusion_matrix_GB.png" width=800 height=600 frameBorder=0></iframe>
+<iframe src="confusion_matrix_GB.html" width=800 height=600 frameBorder=0></iframe>
 
 As our results state, the confusion matrix here is the best we have compared to the previous ones.
 
@@ -71,7 +71,7 @@ As our results state, the confusion matrix here is the best we have compared to 
 Finally, Ada boost with a learning rate of 0.1 and the n_estimators set at 200 by GridSearchCV, obtained a surprisingly low precision score of 0.35, and the same goes for the accuracy whiwh is evaluated at 0.68 and the recall score at 0.33. As we are looking for the precision primarly, this is the worst model. And overall the results are not the best ones too, therefore we will not use this model.
 
 Here is the confusion matrix : 
-<iframe src="confusion_matrix_AB.png" width=800 height=600 frameBorder=0></iframe>
+<iframe src="confusion_matrix_AB.html" width=800 height=600 frameBorder=0></iframe>
 
 Again, our results are coherent with the confusion matrix as this one is the worst one.
 
@@ -89,5 +89,10 @@ Test statistic: Difference in accuracy (extreme minus centered).
 Significance level: 0.01.
 
 Here is the plot of our result : 
+<iframe src="histogram_plot.html" width=800 height=600 frameBorder=0></iframe>
+As we can see, it seems that the differenc ein accuracy across the two groups is significant. Which is not unexpected. Thus the classifier likely does not achieve accuracy parity but here El Nino has an impact so the result is just confirming what we were saying in the first part about the impact of the anomaly level.
 
-As we can see, it seems that 
+
+## Conclusion
+
+After trying a few models, with different hyperparameters and different features, we achieved a resul of 0.69 of precision with the gradient boost model. This model showed an accuracy of 0.81 and a recall score of 0.61. Thus our model seem to be fair over the anomaly level, we could have tested the fairness analysis over the states or the population density, seeing the human impact over the major outages cause but this is a reccurent subject.
