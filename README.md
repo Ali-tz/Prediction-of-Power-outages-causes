@@ -49,6 +49,8 @@ The recall score is also quite low with a result of 0.45 .
 Here is the confusion matrix : 
 <iframe src="confusion_matrix_RF.png" width=800 height=600 frameBorder=0></iframe>
 
+According to this, result look quite good as it seems to be few mistakes.
+
 
 
 ### Decision Tree
@@ -57,11 +59,15 @@ The decisison tree model has a precision of 0.6 with the hyperparameters 'criter
 Here is the confusion matrix : 
 <iframe src="confusion_matrix_DT.png" width=800 height=600 frameBorder=0></iframe>
 
+Here, results look better than the previous model, which is coherent with our results.
+
 ### Gradient Boosting 
 The gradient boost model provide s a precision of 0.69, an accuracy of 0.81 and a recall value of 0.61 using a learning rate of 0.1, a maximum depth of 3 and the n_estimators is set at 50 (chosen to be the best by GridSearchCV). This model is the best one compared to the previous ones as it obtained the best metrics each time.
 
 Here is the confusion matrix : 
 <iframe src="confusion_matrix_GB.png" width=800 height=600 frameBorder=0></iframe>
+
+As our results state, the confusion matrix here is the best we have compared to the previous ones.
 
 ### Ada Boost
 Finally, Ada boost with a learning rate of 0.1 and the n_estimators set at 200 by GridSearchCV, obtained a surprisingly low precision score of 0.35, and the same goes for the accuracy whiwh is evaluated at 0.68 and the recall score at 0.33. As we are looking for the precision primarly, this is the worst model. And overall the results are not the best ones too, therefore we will not use this model.
@@ -69,9 +75,21 @@ Finally, Ada boost with a learning rate of 0.1 and the n_estimators set at 200 b
 Here is the confusion matrix : 
 <iframe src="confusion_matrix_AB.png" width=800 height=600 frameBorder=0></iframe>
 
+Again, our results are coherent with the confusion matrix as this one is the worst one.
+
 ### Conclusion about final model
 The final model chosen is, according to this analyse, the Gradient boost model which provided the best resultsconsidering precision, recall and overall the accuracy. It's F1-score is evaluated at 0.65.
 This model is better than our baseline model for the same reason. This can be also explained, by the different feature provided, and not only due to the tunning and the choice of the model as our previous analysis was. But results show that this model is better, making the gradient boost model our final choice model.
 
 
 ## Fairness Analysis
+
+Let's adress the fairness question. Here we would like to know if one of our causes is more likely to be chosen to any given major outage. We will look at the cause severe weather using the anomaly level.
+Null hypothesis : The classifier's accuracy is the same for both extreme levels and centered levels of El Nino (El Nino is strong over 1.5 or under -1.5 and moderate or low between these two values), and any differences are due to chance.
+Alternative Hypothesis: The classifier's accuracy is higher for extreme anomaly levels.
+Test statistic: Difference in accuracy (extreme minus centered).
+Significance level: 0.01.
+
+Here is the plot of our result : 
+
+As we can see, it seems that 
