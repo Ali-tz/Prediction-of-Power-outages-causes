@@ -1,4 +1,4 @@
-_Link to othe website : https://ali-tz.github.io/Prediction-of-Power-outages-causes/_
+_Link to the website : https://ali-tz.github.io/Prediction-of-Power-outages-causes/_
 
 # Prediction-of-Power-outages-causes
 This project using the dataset, at https://www.sciencedirect.com/science/article/pii/S2352340918307182, and giving us diverse informations about power outages, is used to help us understand and predict the causes og major outages.This is a project made at UCSD.
